@@ -16,6 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from barberback.views import *
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/gettotaldata/', GetDataTotal.as_view()),
+    path('api/v1/getuserinfo/', GetUserInfo.as_view()),
+    path('api/v1/register/', CreateBarber.as_view()),
+    path('api/v1/getlistnewsuser', GetListNewsUser.as_view()),
+    path('api/v1/getlistservices', GetListServices.as_view()),
+    path('api/v1/getlistmasters', GetListMasters.as_view()),
+    path('api/v1/getlisttime/', GetListServicesTime.as_view()),
+    path('api/v1/getstoptime/', GetStopOutMaster.as_view()),
+    path('api/v1/createorder/', CreateUserOrder.as_view()),
+    path('api/v1/getorders/', GetUsersOrder.as_view())
 ]
