@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/michelangelo/PycharmProjects/Barber/venv"
+VIRTUAL_ENV="/home/michelangelo/PycharmProjects/Barber/Barberbackend-Python3-/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
