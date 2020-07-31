@@ -14,6 +14,7 @@ from rest_framework.authtoken.models import Token
 import json
 from datetime import datetime
 
+from django.views.generic.edit import *
 
 class GetUserInfo(APIView):
     authentication_classes = [TokenAuthentication, ]
@@ -308,3 +309,6 @@ class GetDataTotal(APIView):
                     master.bDateEnd = lstop.bDateEnd
         content = SerializerListMasters(lMasters, many=True)
         return content.data
+
+class LoginUser(FormView):
+    pass
