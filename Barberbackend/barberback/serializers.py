@@ -21,7 +21,7 @@ class SerializerUserInfo(serializers.Serializer):
 class SerializerListNews(serializers.ModelSerializer):
     class Meta:
         model = BarberNews
-        fields = ['bTitleNews', 'bTextNews', 'bNewsDate']
+        fields = ['bTitleNews', 'bTextNews', 'bNewsDate', 'bNewsImage']
         
 class SerializerListServices(serializers.ModelSerializer):
     class Meta:
