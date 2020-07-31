@@ -46,7 +46,7 @@ class GetListNewsUser(APIView):
         #    lListPk.append(newssend.bNews.pk)
 
         # lNews = BarberNews.objects.filter(pk__in=lListPk).order_by('-bNewsDate')[:20]
-        lNews = BarberNews.objects.all().order_by('-bNewsDate')[:2]
+        lNews = BarberNews.objects.all().order_by('-bNewsDate')[:50]
         content = SerializerListNews(lNews, many=True)
         return Response(content.data)
 

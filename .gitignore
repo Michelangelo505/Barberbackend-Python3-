@@ -1,10 +1,11 @@
 /venv
 /.idea
 /.vscode
-/.gitignore
+.gitignore
 *.png
 *.jpg
-/media/image
+/media
 *.pyc
+/migrations
 
 
