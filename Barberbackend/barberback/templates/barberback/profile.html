@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout/basic.html" %}
+{% block title %} Профиль {% endblock %}
+{% block content %}
 
-</body>
-</html>
+<p>Имя пользователя - {{profile.Barber_User}}</p>
+<p>Номер телефона - {{profile.Barber_Phone}}</p>
+
+{% endblock %}

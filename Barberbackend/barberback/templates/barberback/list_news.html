@@ -1,0 +1,48 @@
+{% extends "layout/basic.html" %}
+{% block title %} Список пользователей {% endblock %}
+{% block content %}
+
+
+<a href="{% url 'adminpanel:create_new'%}">Добавить новость</a>
+<table border="1">
+    <thead>
+        <th> Заголовок </th>
+        <th> Дата </th>
+        <th colspan="2"> Действие</th>
+    </thead>
+    <tbody>
+    {% for obj in news %}
+        <tr>
+            <td><a href="{% url 'adminpanel:detail_new' obj.pk %}">{{obj.bTitleNews}}</a> </td>
+            <td><a>{{obj.bNewsDate|date:"d.m.Y"}}</a> </td>
+            <td><a href="{% url 'adminpanel:update_new' obj.pk %}">Изменить</a></td>
+            <td><a href="{% url 'adminpanel:delete_new' obj.pk %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(Текущая)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+
+{% endblock %}

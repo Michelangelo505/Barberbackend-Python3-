@@ -1,0 +1,19 @@
+{% extends "layout/basic.html" %}
+{% block title %} Удаление новости {% endblock %}
+{% block content %}
+
+<h2>Вы уверены что хотите удалить эту новость ?</h2>
+<p>{{new.bTitleNews}}</p>
+{% if new.bNewsImage %}
+<img src="{{new.bNewsImage.url}}" width="300" height="300">
+{% else %}
+<h4>Нет картинки у новости.</h4>
+{% endif %}
+<p>{{new.bTextNews}}</p>
+<p>{{new.bNewsDate}}</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Удалить">
+</form>
+
+{% endblock %}

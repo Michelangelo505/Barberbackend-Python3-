@@ -1,0 +1,13 @@
+{% extends "layout/basic.html" %}
+{% block title %} Новость {% endblock %}
+{% block content %}
+
+<p>Заголовок - {{new.bTitleNews}}</p>
+{% if new.bNewsImage %}
+<img src="{{new.bNewsImage.url}}" width="300" height="300">
+{% else %}
+<h4>Нет картинки у новости.</h4>
+{% endif %}
+<p>{{new.bTextNews}}</p>
+<p>{{new.bNewsDate}}</p>
+{% endblock %}

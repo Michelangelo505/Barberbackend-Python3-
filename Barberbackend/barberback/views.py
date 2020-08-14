@@ -309,6 +309,3 @@ class GetDataTotal(APIView):
                     master.bDateEnd = lstop.bDateEnd
         content = SerializerListMasters(lMasters, many=True)
         return content.data
-
-class LoginUser(FormView):
-    pass

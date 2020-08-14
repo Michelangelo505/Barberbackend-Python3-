@@ -22,7 +22,7 @@ from barberback.views import *
 
 
 urlpatterns = [
-    path('',include('barberback.urls')),
+    path('',include('barberback.urls',namespace='')),
     path('admin', admin.site.urls),
     path('api/v1/gettotaldata', GetDataTotal.as_view()),
     path('api/v1/getuserinfo', GetUserInfo.as_view()),
