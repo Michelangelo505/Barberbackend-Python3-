@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<p>Barber</p>
+{% if user.is_authenticated %}
+<p><a href="{% url 'adminpanel:logout' %}">Выйти</a></p>
+<p>Текущий пользователь - {{user.username}}</p>
+<ul>
+    <li><a href="{% url 'adminpanel:index' %}" >Главная</a></li>
+    <li><a href="{% url 'adminpanel:profile' user.username %}"> Профиль </a></li>
+    <li><a href="{% url 'adminpanel:list_news' %}" >Новости</a></li>
+</ul>
+{% else %}
+<p><a href="{% url 'adminpanel:login' %}">Авторизоваться</a></p>
+{% endif %}
+
+<div>
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+</body>
+</html>

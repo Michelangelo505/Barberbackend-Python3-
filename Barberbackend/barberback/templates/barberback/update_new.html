@@ -1,0 +1,9 @@
+{% extends "layout/basic.html" %}
+{% block title %} Изменить новость {% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Изменить"></p>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout/basic.html" %}
+{% block title %} index {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<p><H1>Hello {{user.username}} ! This is admin panel.</H1></p>
+{% else %}
+<p><H1>This is admin panel. Log in please !</H1></p>
+{% endif %}
+
+{% endblock %}
