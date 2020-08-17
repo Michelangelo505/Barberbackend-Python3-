@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from PIL import Image
+
 from .models import BarberProfile, BarberUserSendNews, BarberNews, UserOrders, MasterTimeTable
 from django.contrib.auth.models import User
 from .serializers import *
@@ -50,26 +50,6 @@ class GetListNewsUser(APIView):
         lNews = BarberNews.objects.all().order_by('-bNewsDate')[:2]
         content = SerializerListNews(lNews, many=True)
         return Response(content.data)
-
-    def CompressImage(self, path_to,width,height):
-        """
-        Данный метод сжимает картинку без потери качества
-        с указанием максимальной возможной выстоты и ширины
-
-        :param path_to: Путь к загруженной картинке
-        :param width: Требуемая ширина картинки
-        :param height: Требуемая высота картинки
-        :return: None
-
-        Author: Поздняков М.А.
-        email: garrys505@gmail.com
-        """
-        max_size = (width, height)
-
-        with Image.open(path_to) as original_img:
-            original_img.thumbnail(max_size, Image.ANTIALIAS)
-            original_img.save(path_to, "PNG")
-
 
 class CreateBarber(APIView):
     lNotExist = False

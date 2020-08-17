@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, views
 from django.urls import reverse
 from .forms import *
 
+
 class login(views.LoginView):
     template_name = "barberback/login.html"
     def get_success_url(self):
@@ -89,11 +90,22 @@ class createNew(CreateView):
     form_class = BNewsForm
     success_url = '/list_news'
 
+    def form_valid(self, form):
+        data = form.save()
+        data.ChangeImage()
+        return super().form_valid(form)
+
+
 class updateNew(UpdateView):
     template_name = 'barberback/update_new.html'
     model = BarberNews
     form_class = BNewsForm
     success_url = '/list_news'
+
+    def form_valid(self, form):
+        data = form.save()
+        data.ChangeImage()
+        return super().form_valid(form)
 
 
 class deleteNew(DeleteView):

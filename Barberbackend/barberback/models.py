@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .compress import *
+from django.conf import settings
+import uuid
 # Create your models here.
 
 
@@ -27,6 +30,19 @@ class BarberService(models.Model):
 
 
 class BarberNews(models.Model):
+    def upload_file(instance,filename,upload_dir='imgnews',ext='png'):
+        """
+        Генерирует путь куда будут загружаться картинки,при этом
+        изменяется имя файла и его расширение
+
+        :param filename: имя файла
+        :param upload_dir: директория куда будут загружаться файлы
+        :param ext: расшерение картинки
+        :return: возращает путь к файлу
+        """
+        without_ext_filename = filename.split('.')[0] + '_'+ uuid.uuid4().hex
+        return f'{upload_dir}/{without_ext_filename}.{ext}'
+
     class Meta:
         db_table = 'barber_news'
         ordering = ['bNewsDate']
@@ -34,7 +50,7 @@ class BarberNews(models.Model):
     bTitleNews = models.CharField(max_length=150, verbose_name='Заголовок')
     bTextNews = models.TextField(verbose_name='Текст новости')
     bNewsDate = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-    bNewsImage = models.ImageField(upload_to='imgnews/', verbose_name='Картинка новости', blank=True)
+    bNewsImage = models.ImageField(upload_to=upload_file, verbose_name='Картинка новости', blank=True)
 
     def save(self, *args, **kwargs):
         super(BarberNews, self).save(*args, **kwargs)
@@ -42,6 +58,22 @@ class BarberNews(models.Model):
     def __str__(self):
         return 'Дата создания: %s  Заголовок новости: %s' % (self.bNewsDate, self.bTitleNews)
 
+    def ChangeImage(self):
+        """
+        Изменяет полученную картинку: сохраняет в формате,указанном в расширении файла
+        и масштабирует
+
+        :return: None
+        """
+        width = 512
+        height = 512
+        result = CompressImage(settings.MEDIA_ROOT + str(self.bNewsImage),width,height)
+        # Пока вывожу информацию обработки в консоль.
+        # В идеале нужно в лог-файл !
+        if result:
+            print(f'Обработка изображения - {str(self.bNewsImage)} произошла успешно')
+        else:
+            print(f'Ошибка в обработке изображения - {str(self.bNewsImage)} !')
 
 class BarberUserSendNews(models.Model):
     class Meta:
